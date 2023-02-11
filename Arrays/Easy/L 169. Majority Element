@@ -1,0 +1,19 @@
+/*
+169. Majority Element
+https://leetcode.com/problems/majority-element/description/
+Logic
+1.said that it is more than n/2 times , that means it will be in the middle
+2. if it is even then we can get at size/2 position 
+3. but if it is odd then we need to take the value at size/2+1 position because oddNumber/2 will decrease the positoin by 1
+*/
+
+class Solution {
+    public int majorityElement(int[] nums) {
+
+        Arrays.sort(nums);
+        int len=nums.length;
+        if(len%2==0) return nums[(len/2)-1];
+        return nums[len/2];
+        
+    }
+}
