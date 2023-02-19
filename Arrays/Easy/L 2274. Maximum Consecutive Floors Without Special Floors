@@ -1,0 +1,32 @@
+/**
+2274. Maximum Consecutive Floors Without Special Floors
+
+Logic:(brute force) first sort the array and then count the numbers which are consecutive
+
+Logic: 
+    1. first insert all elements in hashset
+    2. Then we need to find the starting element , so if for a number 'n' n-1 is found that means it is not the first element in the sequence, so only check for starting element
+    3. if the element is starting then check until the last and calculate the difference 
+    4. return the max value;
+    
+ */
+
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        int ans=0;
+        HashSet<Integer> set = new HashSet<>();
+        for(int i:nums) {
+            set.add(i);
+        }
+
+        for(int i:nums) {
+
+            if(!set.contains(i-1)) {
+                int temp=i;
+                while(set.contains(temp+1)) temp++;
+                ans=Math.max(ans, temp-i+1);
+            } 
+        }
+        return ans;
+    }
+}
