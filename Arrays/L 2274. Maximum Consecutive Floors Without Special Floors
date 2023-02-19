@@ -1,0 +1,35 @@
+/**
+2274. Maximum Consecutive Floors Without Special Floors
+
+Logic:
+    1. first sort the sepical array
+    2. then take the difference between bottom and special[0]
+    3. then take the difference between each adjacent elements in special array
+    4. then take the difference between special[length-1] and top element 
+    5. return the max difference
+ */
+
+class Solution {
+    public int maxConsecutive(int bottom, int top, int[] special) {
+        Arrays.sort(special);
+        int ans=0;
+        int max=0;
+        int len=special.length;
+
+        if(bottom <= (special[0]-1) && (special[0]-1) <= top) {   
+            int val = Math.max(ans,special[0]-1-bottom);
+            if(val>=0) max=Math.max(max, val+1); // if their is space only we will include in the ans;
+        }
+
+        for(int i=1;i<special.length;i++) {
+            int val = special[i]-1-special[i-1]-1;
+            if(val>=0) max=Math.max(max, val+1);
+        }
+
+        if(bottom <= (special[len-1]+1) && (special[len-1]+1) <= top) {
+            int val = Math.max(ans, top-(special[len-1]+1));
+            if(val>=0) max=Math.max(max, val+1);
+        } 
+        return max;       
+    }
+}
