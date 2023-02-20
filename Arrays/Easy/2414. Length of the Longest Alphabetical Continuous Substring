@@ -1,0 +1,31 @@
+/**
+2414. Length of the Longest Alphabetical Continuous Substring
+
+Logic:
+    1. use two variables present and previous 
+    2. check the previous+1 == present then increment the count and store the max value
+    3. if not equal then reset the ans value to ans=1
+    4. at last make the previous as present
+    5. return the  max value
+ */
+
+class Solution {
+    public int longestContinuousSubstring(String s) {
+        int ans=1, max=1;
+
+        int prev=s.charAt(0)-'a';
+        for(int i=1;i<s.length();i++) {
+            int present=s.charAt(i)-'a';
+            if(prev+1==present) {
+                ans++;
+                max=Math.max(max, ans);
+            }
+            else{
+                ans=1;
+            }
+            prev=present;
+
+        }
+        return max;
+    }
+}
