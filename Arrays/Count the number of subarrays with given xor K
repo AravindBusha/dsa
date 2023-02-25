@@ -1,0 +1,34 @@
+// https://takeuforward.org/data-structure/count-the-number-of-subarrays-with-given-xor-k/
+Count the number of subarrays with given xor K
+
+/** use the prefix and map to store it
+ * let p={1,2,3,4,5} and q={1,2,3} then p^q is {4,5} lets say it as r
+ * if p^q=r then q=p^r 
+ * In the question given val as r 
+ * at a point we will be at p-end by doing p^r we wiil get the starting end value of Q that is the range and it is the ans
+
+*/
+import java.util.*;
+
+public class MyClass {
+    public static void main(String args[]) {
+        int val=6;
+        int arr[] = {5, 6, 7, 8, 9};
+        
+        int ans=0, prefix=0;
+        HashMap<Integer,Integer> map = new HashMap<>();
+        map.put(0,1);
+        
+        for(int i:arr) {
+            prefix^=i;
+            int afterValRemove = prefix^val;
+            if(map.containsKey(afterValRemove)) {
+                ans+=map.get(afterValRemove);
+                
+            }
+            map.put(prefix,map.getOrDefault(prefix,0)+1);
+        }
+        System.out.println(ans);
+        System.out.println(map);
+    }
+}
